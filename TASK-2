@@ -1,0 +1,32 @@
+import pandas as pd
+
+# Load the Excel file into a pandas DataFrame
+df = pd.read_excel('/content/Restaurant.xlsx')
+
+# Display DataFrame Info and first 5 rows
+print("DataFrame Info:")
+df.info()
+print("\nFirst 5 rows of the DataFrame:")
+display(df.head())
+
+# Calculate descriptive statistics for numerical columns
+numerical_cols = df.select_dtypes(include=['number']).columns
+
+if not numerical_cols.empty:
+    descriptive_stats = df[numerical_cols].describe()
+    print("\nDescriptive Statistics for Numerical Columns:")
+    display(descriptive_stats)
+else:
+    print("No numerical columns found in the DataFrame.")
+
+# Distribution of 'Country Code'
+print("\nDistribution of 'Country Code':")
+display(df['Country Code'].value_counts())
+
+# Distribution of 'City' (top 10)
+print("\nDistribution of 'City':")
+display(df['City'].value_counts().head(10))
+
+# Distribution of 'Cuisines' (top 10)
+print("\nDistribution of 'Cuisines':")
+display(df['Cuisines'].value_counts().head(10))
